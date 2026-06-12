@@ -21,6 +21,4 @@ public class HermesProperties extends HermesClientConfig {
     /** CLI 不可用时是否快速失败。 */
     private boolean failFastOnUnavailable = false;
 
-    /** CLI 可执行文件名（映射至父类 localExecutable）。 */
-    private String cliExecutable;
 }
