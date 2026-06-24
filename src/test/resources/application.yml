@@ -1,0 +1,22 @@
+# ============================================================================
+# Hermes Spring Boot Starter 完整配置示例
+# ============================================================================
+hermes:
+  enabled: true
+  http:
+    server-url: http://127.0.0.1:8642
+    api-key: ${HERMES_API_KEY:}
+    connect-timeout-millis: 15000
+    read-timeout-millis: 300000
+    verify-ssl: true
+    default-model: hermes-agent
+    default-instructions:
+    default-provider:
+  cli:
+    executable: hermes
+    timeout: 300
+    working-directory:
+    max-concurrent-executions: 0
+    probe-timeout-seconds: 5
+    startup-check-enabled: true
+    fail-fast-on-unavailable: false
