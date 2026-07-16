@@ -24,6 +24,6 @@ public class HermesAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = HermesProperties.PREFIX, name = "startup-check-enabled", havingValue = "true", matchIfMissing = true)
     public HermesCliStartupChecker hermesCliStartupChecker(HermesProperties properties) {
-        return new HermesCliStartupChecker(properties, properties.isFailFastOnUnavailable());
+        return new HermesCliStartupChecker(properties.getCli(), properties.isFailFastOnUnavailable());
     }
 }
