@@ -1,7 +1,6 @@
 package io.github.hiwepy.hermes.spring.boot;
 
 import io.github.hiwepy.hermes.HermesClient;
-import io.github.hiwepy.hermes.HermesClientConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,8 +16,8 @@ public class HermesAutoConfiguration {
 
     @Bean(destroyMethod = "close")
     @ConditionalOnMissingBean
-    public HermesClient hermesClient(HermesClientConfig config) {
-        return new HermesClient(config);
+    public HermesClient hermesClient(HermesProperties properties) {
+        return new HermesClient(properties.getHttp(), properties.getCli());
     }
 
     @Bean
