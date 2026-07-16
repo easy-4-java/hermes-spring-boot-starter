@@ -1,23 +1,21 @@
 package io.github.hiwepy.hermes.spring.boot;
 
-import io.github.hiwepy.hermes.HermesClientConfig;
+import io.github.hiwepy.hermes.HermesCliConfig;
 import io.github.hiwepy.hermes.cli.HermesCliExecutor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 /**
  * 启动时探测 Hermes CLI 是否可用。
  */
+@Slf4j
 public class HermesCliStartupChecker implements ApplicationRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(HermesCliStartupChecker.class);
-
-    private final HermesClientConfig config;
+    private final HermesCliConfig config;
     private final boolean failFast;
 
-    public HermesCliStartupChecker(HermesClientConfig config, boolean failFast) {
+    public HermesCliStartupChecker(HermesCliConfig config, boolean failFast) {
         this.config = config;
         this.failFast = failFast;
     }
@@ -28,9 +26,9 @@ public class HermesCliStartupChecker implements ApplicationRunner {
         boolean available = executor.probe();
 
         if (available) {
-            log.info("Hermes CLI is available: {}", config.getLocalExecutable());
+            log.info("Hermes CLI is available: {}", config.getExecutable());
         } else {
-            String message = "Hermes CLI is NOT available: " + config.getLocalExecutable();
+            String message = "Hermes CLI is NOT available: " + config.getExecutable();
             if (failFast) {
                 throw new HermesCliUnavailableException(message);
             } else {
