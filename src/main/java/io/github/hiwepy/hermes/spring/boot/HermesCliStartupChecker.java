@@ -26,9 +26,9 @@ public class HermesCliStartupChecker implements ApplicationRunner {
         boolean available = executor.probe();
 
         if (available) {
-            log.info("Hermes CLI is available: {}", config.getLocalExecutable());
+            log.info("Hermes CLI is available: {}", config.getCliExecutable());
         } else {
-            String message = "Hermes CLI is NOT available: " + config.getLocalExecutable();
+            String message = "Hermes CLI is NOT available: " + config.getCliExecutable();
             if (failFast) {
                 throw new HermesCliUnavailableException(message);
             } else {
