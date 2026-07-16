@@ -2,15 +2,17 @@ package io.github.hiwepy.hermes.spring.boot;
 
 import io.github.hiwepy.hermes.HermesClientConfig;
 import io.github.hiwepy.hermes.cli.HermesCliExecutor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 /**
  * 启动时探测 Hermes CLI 是否可用。
  */
-@Slf4j
 public class HermesCliStartupChecker implements ApplicationRunner {
+
+    private static final Logger log = LoggerFactory.getLogger(HermesCliStartupChecker.class);
 
     private final HermesClientConfig config;
     private final boolean failFast;
