@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.hiwepy.hermes.spring.boot.HermesAutoConfiguration
+  io.github.easy4j.hermes.spring.boot.HermesAutoConfiguration
