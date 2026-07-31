@@ -1,7 +1,7 @@
-package io.github.hiwepy.hermes.spring.boot;
+package io.github.easy4j.hermes.spring.boot;
 
-import io.github.hiwepy.hermes.HermesClientConfig;
-import io.github.hiwepy.hermes.cli.HermesCliExecutor;
+import io.github.easy4j.hermes.HermesClientConfig;
+import io.github.easy4j.hermes.cli.HermesCliExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
