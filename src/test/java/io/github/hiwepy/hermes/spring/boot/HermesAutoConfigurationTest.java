@@ -1,8 +1,8 @@
-package io.github.hiwepy.hermes.spring.boot;
+package io.github.easy4j.hermes.spring.boot;
 
-import io.github.hiwepy.hermes.HermesClient;
-import io.github.hiwepy.hermes.HermesHttpClientConfig;
-import io.github.hiwepy.hermes.cli.availability.HermesCliAvailabilityChecker;
+import io.github.easy4j.hermes.HermesClient;
+import io.github.easy4j.hermes.HermesHttpClientConfig;
+import io.github.easy4j.hermes.cli.availability.HermesCliAvailabilityChecker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package io.github.hiwepy.hermes.spring.boot;
+package io.github.easy4j.hermes.spring.boot;
 
-import io.github.hiwepy.hermes.cli.availability.HermesCliAvailabilityChecker;
-import io.github.hiwepy.hermes.exception.HermesCliStartupException;
+import io.github.easy4j.hermes.cli.availability.HermesCliAvailabilityChecker;
+import io.github.easy4j.hermes.exception.HermesCliStartupException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.mock.env.MockEnvironment;
