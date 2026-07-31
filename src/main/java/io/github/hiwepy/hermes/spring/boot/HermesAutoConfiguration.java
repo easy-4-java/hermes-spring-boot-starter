@@ -1,6 +1,6 @@
-package io.github.hiwepy.hermes.spring.boot;
+package io.github.easy4j.hermes.spring.boot;
 
-import io.github.hiwepy.hermes.HermesClient;
+import io.github.easy4j.hermes.HermesClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
