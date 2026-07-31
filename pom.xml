@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>io.github.hiwepy</groupId>
+	<groupId>io.github.easy4j</groupId>
 	<artifactId>hermes-spring-boot-starter</artifactId>
 	<description>Spring Boot starter for Hermes Java SDK</description>
 	<version>2.3.x.20260630-SNAPSHOT</version>
@@ -442,7 +442,7 @@
 
 		<!-- SDK dependency -->
 		<dependency>
-			<groupId>io.github.hiwepy</groupId>
+			<groupId>io.github.easy4j</groupId>
 			<artifactId>hermes-java-sdk</artifactId>
 			<version>${hermes-java-sdk.version}</version>
 		</dependency>
