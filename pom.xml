@@ -13,7 +13,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>hermes-spring-boot-starter</artifactId>
     <description>Spring Boot starter for Hermes Java SDK</description>
-    <version>4.0.x.20260630-SNAPSHOT</version>
+    <version>3.1.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/hiwepy/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -419,6 +419,7 @@
     </profiles>
 
     <properties>
+        <java.version>17</java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
