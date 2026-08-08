@@ -1,6 +1,8 @@
 package io.github.easy4j.hermes.spring.boot;
 
 import io.github.easy4j.hermes.HermesClient;
+import io.github.easy4j.hermes.HermesCliConfig;
+import io.github.easy4j.hermes.HermesHttpClientConfig;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -29,6 +31,8 @@ class HermesAutoConfigurationTest {
             assertEquals(120_000, client.readTimeoutMillis());
             assertEquals(128, client.dispatcher().getMaxRequests());
             assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(2_000, context.getBean(HermesHttpClientConfig.class).getConnectTimeoutMillis());
+            assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
         });
     }
@@ -42,8 +46,8 @@ class HermesAutoConfigurationTest {
                 .connectionPool(new ConnectionPool(17, 7, TimeUnit.MINUTES))
                 .build();
 
-        contextRunner.withBean(OkHttpClient.class, () -> external).run(context -> {
-            assertSame(external, context.getBean(OkHttpClient.class));
+        contextRunner.withBean("hermesOkHttpClient", OkHttpClient.class, () -> external).run(context -> {
+            assertSame(external, context.getBean("hermesOkHttpClient", OkHttpClient.class));
             assertSame(external, context.getBean(HermesClient.class).getOkHttpClient());
         });
         assertEquals(73, external.dispatcher().getMaxRequests());
