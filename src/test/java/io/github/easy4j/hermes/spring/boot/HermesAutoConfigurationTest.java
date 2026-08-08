@@ -3,6 +3,7 @@ package io.github.easy4j.hermes.spring.boot;
 import io.github.easy4j.hermes.HermesClient;
 import io.github.easy4j.hermes.HermesCliConfig;
 import io.github.easy4j.hermes.HermesHttpClientConfig;
+import io.github.easy4j.hermes.HttpResponseMode;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -22,6 +23,9 @@ class HermesAutoConfigurationTest {
             .withUserConfiguration(HermesAutoConfiguration.class)
             .withPropertyValues(
                     "hermes.http.startup-check-enabled=false",
+                    "hermes.http.base-url=http://hermes.example:8642",
+                    "hermes.http.mode=auto",
+                    "hermes.http.stream-core-pool-size=7",
                     "hermes.cli.startup-check-enabled=false");
 
     @Test
@@ -33,7 +37,11 @@ class HermesAutoConfigurationTest {
             assertEquals(120_000, client.readTimeoutMillis());
             assertEquals(128, client.dispatcher().getMaxRequests());
             assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
-            assertEquals(2_000, context.getBean(HermesHttpClientConfig.class).getConnectTimeoutMillis());
+            HermesHttpClientConfig http = context.getBean(HermesHttpClientConfig.class);
+            assertEquals(2_000, http.getConnectTimeoutMillis());
+            assertEquals("http://hermes.example:8642", http.getBaseUrl());
+            assertEquals(HttpResponseMode.AUTO, http.getMode());
+            assertEquals(7, http.getStreamCorePoolSize());
             assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
         });
