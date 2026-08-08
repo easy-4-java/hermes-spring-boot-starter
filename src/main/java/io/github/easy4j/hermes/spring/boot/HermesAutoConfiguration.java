@@ -1,6 +1,10 @@
 package io.github.easy4j.hermes.spring.boot;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.easy4j.hermes.HermesClient;
+import io.github.easy4j.hermes.HermesOkHttpClientFactory;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -36,8 +40,29 @@ public class HermesAutoConfiguration {
      */
     @Bean(destroyMethod = "close")
     @ConditionalOnMissingBean
-    public HermesClient hermesClient(HermesProperties properties) {
-        return new HermesClient(properties.getHttp(), properties.getCli());
+    public HermesClient hermesClient(HermesProperties properties,
+                                     ObjectMapper objectMapper,
+                                     OkHttpClient okHttpClient) {
+        return new HermesClient(properties.getHttp(), properties.getCli(), objectMapper, okHttpClient);
+    }
+
+    /**
+     * 创建容器共享的高并发 OkHttpClient；若应用已提供客户端则保持原实例。
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public OkHttpClient hermesOkHttpClient(HermesProperties properties) {
+        return HermesOkHttpClientFactory.create(properties.getHttp());
+    }
+
+    /**
+     * 在应用没有 Jackson 配置时提供兼容性兜底。
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ObjectMapper hermesObjectMapper() {
+        return new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
 }
