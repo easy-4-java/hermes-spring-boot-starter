@@ -1,0 +1,37 @@
+{
+  "groups": [
+    { "name": "hermes.http", "type": "io.github.easy4j.hermes.HermesHttpClientConfig", "sourceType": "io.github.easy4j.hermes.spring.boot.HermesProperties" },
+    { "name": "hermes.cli", "type": "io.github.easy4j.hermes.HermesCliConfig", "sourceType": "io.github.easy4j.hermes.spring.boot.HermesProperties" }
+  ],
+  "properties": [
+    { "name": "hermes.enabled", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.startup-check-enabled", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.fail-fast-on-unavailable", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.http.enabled", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.http.startup-check-enabled", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.http.fail-fast-on-unavailable", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.http.server-url", "type": "java.lang.String", "defaultValue": "http://localhost:8642" },
+    { "name": "hermes.http.api-key", "type": "java.lang.String" },
+    { "name": "hermes.http.connect-timeout-millis", "type": "java.lang.Integer", "defaultValue": 2000 },
+    { "name": "hermes.http.read-timeout-millis", "type": "java.lang.Integer", "defaultValue": 120000 },
+    { "name": "hermes.http.write-timeout-millis", "type": "java.lang.Integer", "defaultValue": 10000 },
+    { "name": "hermes.http.call-timeout-millis", "type": "java.lang.Integer", "defaultValue": 0 },
+    { "name": "hermes.http.max-idle-connections", "type": "java.lang.Integer", "defaultValue": 32 },
+    { "name": "hermes.http.keep-alive-duration-millis", "type": "java.lang.Long", "defaultValue": 300000 },
+    { "name": "hermes.http.max-requests", "type": "java.lang.Integer", "defaultValue": 128 },
+    { "name": "hermes.http.max-requests-per-host", "type": "java.lang.Integer", "defaultValue": 64 },
+    { "name": "hermes.http.retry-on-connection-failure", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.http.verify-ssl", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.http.default-model", "type": "java.lang.String", "defaultValue": "hermes-agent" },
+    { "name": "hermes.http.default-instructions", "type": "java.lang.String" },
+    { "name": "hermes.http.default-provider", "type": "java.lang.String" },
+    { "name": "hermes.cli.enabled", "type": "java.lang.Boolean", "defaultValue": true },
+    { "name": "hermes.cli.startup-check-enabled", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.cli.fail-fast-on-unavailable", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.cli.executable", "type": "java.lang.String", "defaultValue": "hermes" },
+    { "name": "hermes.cli.timeout", "type": "java.lang.Integer", "defaultValue": 300 },
+    { "name": "hermes.cli.probe-timeout-seconds", "type": "java.lang.Integer", "defaultValue": 5 },
+    { "name": "hermes.cli.working-directory", "type": "java.lang.String" },
+    { "name": "hermes.cli.max-concurrent-executions", "type": "java.lang.Integer", "defaultValue": 0 }
+  ]
+}
