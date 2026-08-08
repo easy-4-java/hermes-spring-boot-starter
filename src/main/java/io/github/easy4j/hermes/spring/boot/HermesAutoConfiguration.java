@@ -1,6 +1,10 @@
 package io.github.easy4j.hermes.spring.boot;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.easy4j.hermes.HermesClient;
+import io.github.easy4j.hermes.HermesOkHttpClientFactory;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,29 +19,28 @@ import org.springframework.context.annotation.Configuration;
 public class HermesAutoConfiguration {
 
     /**
-     * 创建 HermesClient Bean。
-     * <p>客户端会在初始化时根据配置执行启动检查：</p>
-     * <ul>
-     *   <li>HTTP：调用 /health 端点检查服务可用性</li>
-     *   <li>CLI：探测 hermes 可执行文件是否可用</li>
-     * </ul>
-     * <p>检查行为由以下配置控制：</p>
-     * <ul>
-     *   <li>hermes.http.enabled - 是否启用 HTTP 客户端</li>
-     *   <li>hermes.http.startup-check-enabled - 是否在启动时检查 HTTP 服务</li>
-     *   <li>hermes.http.fail-fast-on-unavailable - HTTP 检查失败时是否抛异常</li>
-     *   <li>hermes.cli.enabled - 是否启用 CLI</li>
-     *   <li>hermes.cli.startup-check-enabled - 是否在启动时检查 CLI 可用性</li>
-     *   <li>hermes.cli.fail-fast-on-unavailable - CLI 检查失败时是否抛异常</li>
-     * </ul>
-     *
-     * @param properties 配置属性
-     * @return HermesClient 实例
+     * 创建 HermesClient Bean，并复用容器中的 ObjectMapper 与 OkHttpClient。
      */
     @Bean(destroyMethod = "close")
     @ConditionalOnMissingBean
-    public HermesClient hermesClient(HermesProperties properties) {
-        return new HermesClient(properties.getHttp(), properties.getCli());
+    public HermesClient hermesClient(HermesProperties properties,
+                                     ObjectMapper objectMapper,
+                                     OkHttpClient okHttpClient) {
+        return new HermesClient(properties.getHttp(), properties.getCli(), objectMapper, okHttpClient);
     }
 
+    /** 创建容器共享的高并发 OkHttpClient；若应用已提供客户端则保持原实例。 */
+    @Bean
+    @ConditionalOnMissingBean
+    public OkHttpClient hermesOkHttpClient(HermesProperties properties) {
+        return HermesOkHttpClientFactory.create(properties.getHttp());
+    }
+
+    /** 在应用没有 Jackson 配置时提供兼容性兜底。 */
+    @Bean
+    @ConditionalOnMissingBean
+    public ObjectMapper hermesObjectMapper() {
+        return new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
 }
