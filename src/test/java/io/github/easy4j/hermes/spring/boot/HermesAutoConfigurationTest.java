@@ -30,7 +30,7 @@ class HermesAutoConfigurationTest {
             assertEquals(10_000, client.writeTimeoutMillis());
             assertEquals(120_000, client.readTimeoutMillis());
             assertEquals(128, client.dispatcher().getMaxRequests());
-            assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(128, client.dispatcher().getMaxRequestsPerHost());
             assertEquals(2_000, context.getBean(HermesHttpClientConfig.class).getConnectTimeoutMillis());
             assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
