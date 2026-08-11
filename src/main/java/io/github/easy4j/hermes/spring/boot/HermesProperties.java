@@ -3,6 +3,7 @@ package io.github.easy4j.hermes.spring.boot;
 import io.github.easy4j.hermes.HermesClientConfig;
 import io.github.easy4j.hermes.HermesCliConfig;
 import io.github.easy4j.hermes.HermesHttpClientConfig;
+import io.github.easy4j.hermes.HermesDebugConfig;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,6 +19,10 @@ public class HermesProperties extends HermesClientConfig {
     /** 启用/禁用 Hermes starter。 */
     private boolean enabled = true;
 
+    /** SDK 所有通道共享的分级调试配置。 */
+    @NestedConfigurationProperty
+    private final HermesDebugConfig debug = new HermesDebugConfig();
+
     /** 启动时是否探测 CLI 可用性。 */
     private boolean startupCheckEnabled = true;
 
@@ -26,10 +31,10 @@ public class HermesProperties extends HermesClientConfig {
 
     /** Hermes HTTP API 配置。 */
     @NestedConfigurationProperty
-    private final HermesHttpClientConfig http = new HermesHttpClientConfig();
+    private final HermesHttpClientConfig http = new HermesHttpClientConfig(debug);
 
     /** Hermes 本地 CLI 配置。 */
     @NestedConfigurationProperty
-    private final HermesCliConfig cli = new HermesCliConfig();
+    private final HermesCliConfig cli = new HermesCliConfig(debug);
 
 }
