@@ -1,9 +1,13 @@
 {
   "groups": [
+    { "name": "hermes.debug", "type": "io.github.easy4j.hermes.HermesDebugConfig", "sourceType": "io.github.easy4j.hermes.spring.boot.HermesProperties" },
     { "name": "hermes.http", "type": "io.github.easy4j.hermes.HermesHttpClientConfig", "sourceType": "io.github.easy4j.hermes.spring.boot.HermesProperties" },
     { "name": "hermes.cli", "type": "io.github.easy4j.hermes.HermesCliConfig", "sourceType": "io.github.easy4j.hermes.spring.boot.HermesProperties" }
   ],
   "properties": [
+    { "name": "hermes.debug.enabled", "type": "java.lang.Boolean", "defaultValue": false },
+    { "name": "hermes.debug.level", "type": "okhttp3.extension.logging.HttpLogLevel", "defaultValue": "BASIC" },
+    { "name": "hermes.debug.max-content-length", "type": "java.lang.Integer", "defaultValue": 2000 },
     { "name": "hermes.http.mode", "type": "io.github.easy4j.hermes.HttpResponseMode", "defaultValue": "BLOCKING" },
     { "name": "hermes.enabled", "type": "java.lang.Boolean", "defaultValue": true },
     { "name": "hermes.startup-check-enabled", "type": "java.lang.Boolean", "defaultValue": true },

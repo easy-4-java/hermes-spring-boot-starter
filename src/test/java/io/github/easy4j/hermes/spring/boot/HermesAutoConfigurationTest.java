@@ -26,7 +26,10 @@ class HermesAutoConfigurationTest {
                     "hermes.http.base-url=http://hermes.example:8642",
                     "hermes.http.mode=auto",
                     "hermes.http.stream-core-pool-size=7",
-                    "hermes.cli.startup-check-enabled=false");
+                    "hermes.cli.startup-check-enabled=false",
+                    "hermes.debug.enabled=true",
+                    "hermes.debug.level=HEADERS",
+                    "hermes.debug.max-content-length=4096");
 
     @Test
     void shouldCreateHighConcurrencyDefaults() {
@@ -36,13 +39,19 @@ class HermesAutoConfigurationTest {
             assertEquals(10_000, client.writeTimeoutMillis());
             assertEquals(120_000, client.readTimeoutMillis());
             assertEquals(128, client.dispatcher().getMaxRequests());
-            assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(128, client.dispatcher().getMaxRequestsPerHost());
             HermesHttpClientConfig http = context.getBean(HermesHttpClientConfig.class);
             assertEquals(2_000, http.getConnectTimeoutMillis());
             assertEquals("http://hermes.example:8642", http.getBaseUrl());
             assertEquals(HttpResponseMode.AUTO, http.getMode());
             assertEquals(7, http.getStreamCorePoolSize());
             assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
+            HermesProperties properties = context.getBean(HermesProperties.class);
+            assertEquals(true, properties.getDebug().isEnabled());
+            assertEquals("HEADERS", properties.getDebug().getLevel().name());
+            assertEquals(4096, properties.getDebug().getMaxContentLength());
+            assertSame(properties.getDebug(), properties.getHttp().getDebug());
+            assertSame(properties.getDebug(), properties.getCli().getDebug());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
         });
     }
