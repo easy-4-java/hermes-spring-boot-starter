@@ -13,7 +13,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>hermes-spring-boot-starter</artifactId>
     <description>Spring Boot starter for Hermes Java SDK</description>
-    <version>3.1.x.20260630</version>
+    <version>3.1.x.20260730-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -468,7 +468,7 @@
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
-        <hermes-java-sdk.version>2.0.x.20260630</hermes-java-sdk.version>
+        <hermes-java-sdk.version>2.0.x.20260730-SNAPSHOT</hermes-java-sdk.version>
         <okhttp.version>4.12.0</okhttp.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
