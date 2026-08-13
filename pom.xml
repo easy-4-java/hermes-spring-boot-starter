@@ -13,7 +13,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>hermes-spring-boot-starter</artifactId>
     <description>Spring Boot starter for Hermes Java SDK</description>
-    <version>4.1.x.20260630-SNAPSHOT</version>
+    <version>4.1.x.20260630</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/hiwepy/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -236,23 +236,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
-                <plugin>
-                    <!-- 将制品 staging 至 OSS Sonatype Nexus -->
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${maven-nexus-staging-plugin.version}</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        <!-- <sslAllowAll>true</sslAllowAll> -->
-                        <stagingProgressPauseDurationSeconds>60</stagingProgressPauseDurationSeconds>
-                        <stagingProgressTimeoutMinutes>20</stagingProgressTimeoutMinutes>
-                        <detectBuildFailures>true</detectBuildFailures>
-                    </configuration>
-                </plugin>
+
                         <!-- 中央仓库发布插件: 将制品发布至 Maven Central -->
             <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
             <plugin>
@@ -437,12 +421,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>
                     </plugin>
-                    <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
-                    <plugin>
-                        <!-- 将制品 staging 至 OSS Sonatype Nexus -->
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                    </plugin>                    <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
+                    <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
                     <plugin>
                         <!-- 中央仓库发布插件: 将制品发布至 Maven Central -->
                         <groupId>org.sonatype.central</groupId>
@@ -467,8 +446,7 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
-        <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
-        <hermes-java-sdk.version>3.0.x.20260630-SNAPSHOT</hermes-java-sdk.version>
+        <hermes-java-sdk.version>3.0.x.20260630</hermes-java-sdk.version>
         <okhttp.version>5.4.0</okhttp.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
