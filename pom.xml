@@ -19,6 +19,34 @@
     <description>Spring Boot starter for Hermes Java SDK</description>
     <url>https://github.com/hiwepy/${project.artifactId}</url>
 
+        <licenses>
+
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+        <scm>
+
+        <connection>scm:git:https://github.com/hiwepy/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:https://github.com/hiwepy/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/hiwepy/${project.artifactId}</url>
+        <tag>${project.artifactId}</tag>
+    </scm>
+
+        <developers>
+
+        <developer>
+            <name>hiwepy</name>
+            <email>hiwepy@gmail.com</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
