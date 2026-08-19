@@ -23,6 +23,11 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnClass(HermesClient.class)
 @ConditionalOnProperty(prefix = HermesProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(HermesProperties.class)
+/**
+ * <p>Auto-configuration for HermesAutoConfiguration.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class HermesAutoConfiguration {
 
     /**
@@ -39,12 +44,22 @@ public class HermesAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    /**
+     * <p>Hermes http client config.</p>
+     * @param properties
+     * @return the result
+     */
     public HermesHttpClientConfig hermesHttpClientConfig(HermesProperties properties) {
         return properties.getHttp();
     }
 
     @Bean
     @ConditionalOnMissingBean
+    /**
+     * <p>Hermes cli config.</p>
+     * @param properties
+     * @return the result
+     */
     public HermesCliConfig hermesCliConfig(HermesProperties properties) {
         return properties.getCli();
     }
@@ -78,6 +93,10 @@ public class HermesAutoConfiguration {
     /** 在应用没有 Jackson 配置时提供兼容性兜底。 */
     @Bean
     @ConditionalOnMissingBean
+    /**
+     * <p>Hermes object mapper.</p>
+     * @return the result
+     */
     public ObjectMapper hermesObjectMapper() {
         return new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

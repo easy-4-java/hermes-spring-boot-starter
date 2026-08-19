@@ -12,6 +12,11 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ConfigurationProperties(prefix = HermesProperties.PREFIX)
+/**
+ * <p>Auto-configuration for HermesProperties.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class HermesProperties extends HermesClientConfig {
 
     public static final String PREFIX = "hermes";
