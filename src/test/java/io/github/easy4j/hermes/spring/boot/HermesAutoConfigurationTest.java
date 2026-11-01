@@ -30,10 +30,24 @@ class HermesAutoConfigurationTest {
             assertEquals(10_000, client.writeTimeoutMillis());
             assertEquals(120_000, client.readTimeoutMillis());
             assertEquals(128, client.dispatcher().getMaxRequests());
-            assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(128, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(128, context.getBean(HermesHttpClientConfig.class).getMaxRequestsPerHost());
             assertEquals(2_000, context.getBean(HermesHttpClientConfig.class).getConnectTimeoutMillis());
             assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
+        });
+    }
+
+    @Test
+    void shouldApplyExplicitConcurrencyLimits() {
+        contextRunner.withPropertyValues(
+                "hermes.http.max-requests=96",
+                "hermes.http.max-requests-per-host=64").run(context -> {
+            OkHttpClient client = context.getBean(OkHttpClient.class);
+            assertEquals(96, client.dispatcher().getMaxRequests());
+            assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
+            assertEquals(96, context.getBean(HermesHttpClientConfig.class).getMaxRequests());
+            assertEquals(64, context.getBean(HermesHttpClientConfig.class).getMaxRequestsPerHost());
         });
     }
 
