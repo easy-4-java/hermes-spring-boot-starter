@@ -469,7 +469,7 @@
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
-        <hermes-java-sdk.version>2.0.x.20260730-SNAPSHOT</hermes-java-sdk.version>
+        <hermes-java-sdk.version>2.0.x.20260630-SNAPSHOT</hermes-java-sdk.version>
         <okhttp.version>4.12.0</okhttp.version>
         <slf4j.version>2.0.18</slf4j.version>
 
