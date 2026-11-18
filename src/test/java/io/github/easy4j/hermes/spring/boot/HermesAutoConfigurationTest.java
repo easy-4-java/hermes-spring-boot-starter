@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HermesAutoConfigurationTest {
 
@@ -32,9 +33,33 @@ class HermesAutoConfigurationTest {
             assertEquals(128, client.dispatcher().getMaxRequests());
             assertEquals(64, client.dispatcher().getMaxRequestsPerHost());
             assertEquals(2_000, context.getBean(HermesHttpClientConfig.class).getConnectTimeoutMillis());
+            HermesHttpClientConfig http = context.getBean(HermesHttpClientConfig.class);
+            assertEquals("http://127.0.0.1:8642", http.requireBaseUrl());
+            assertThrows(IllegalArgumentException.class,
+                    () -> http.getEndpointPolicy().require("http://127.0.0.1:8643"));
+            assertThrows(IllegalArgumentException.class,
+                    () -> http.getEndpointPolicy().require("https://1.1.1.1"));
             assertEquals(300, context.getBean(HermesCliConfig.class).getTimeout());
             assertSame(client, context.getBean(HermesClient.class).getOkHttpClient());
         });
+    }
+
+    @Test
+    void shouldKeepStrictPublicPolicyForExplicitRemoteEndpoint() {
+        contextRunner.withPropertyValues("hermes.http.base-url=https://1.1.1.1")
+                .run(context -> {
+                    HermesHttpClientConfig config = context.getBean(HermesHttpClientConfig.class);
+                    assertEquals("https://1.1.1.1", config.requireBaseUrl());
+                    assertThrows(IllegalArgumentException.class,
+                            () -> config.getEndpointPolicy().require("http://127.0.0.1:8642"));
+                });
+    }
+
+    @Test
+    void shouldKeepExplicitPerHostConcurrency() {
+        contextRunner.withPropertyValues("hermes.http.max-requests-per-host=73")
+                .run(context -> assertEquals(73,
+                        context.getBean(OkHttpClient.class).dispatcher().getMaxRequestsPerHost()));
     }
 
     @Test

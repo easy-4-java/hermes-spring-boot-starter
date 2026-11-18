@@ -10,7 +10,7 @@
     { "name": "hermes.http.enabled", "type": "java.lang.Boolean", "defaultValue": true },
     { "name": "hermes.http.startup-check-enabled", "type": "java.lang.Boolean", "defaultValue": false },
     { "name": "hermes.http.fail-fast-on-unavailable", "type": "java.lang.Boolean", "defaultValue": false },
-    { "name": "hermes.http.server-url", "type": "java.lang.String", "defaultValue": "http://localhost:8642" },
+    { "name": "hermes.http.base-url", "type": "java.lang.String", "defaultValue": "http://127.0.0.1:8642" },
     { "name": "hermes.http.api-key", "type": "java.lang.String" },
     { "name": "hermes.http.connect-timeout-millis", "type": "java.lang.Integer", "defaultValue": 2000 },
     { "name": "hermes.http.read-timeout-millis", "type": "java.lang.Integer", "defaultValue": 120000 },

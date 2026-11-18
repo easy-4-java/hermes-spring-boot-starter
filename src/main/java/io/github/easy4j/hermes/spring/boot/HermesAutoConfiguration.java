@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.easy4j.hermes.HermesClient;
 import io.github.easy4j.hermes.HermesCliConfig;
 import io.github.easy4j.hermes.HermesHttpClientConfig;
+import io.github.easy4j.hermes.security.EndpointPolicy;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -16,6 +17,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,8 +41,17 @@ public class HermesAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HermesHttpClientConfig hermesHttpClientConfig(HermesProperties properties) {
-        return properties.getHttp();
+    public HermesHttpClientConfig hermesHttpClientConfig(HermesProperties properties,
+                                                         Environment environment) {
+        HermesHttpClientConfig http = properties.getHttp();
+        if (!environment.containsProperty("hermes.http.base-url")) {
+            http.setEndpointPolicy(EndpointPolicy.trustedLocal("127.0.0.1", 8642));
+            http.setBaseUrl("http://127.0.0.1:8642");
+        }
+        if (!environment.containsProperty("hermes.http.max-requests-per-host")) {
+            http.setMaxRequestsPerHost(64);
+        }
+        return http;
     }
 
     @Bean
